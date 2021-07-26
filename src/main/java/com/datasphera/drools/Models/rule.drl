@@ -1,0 +1,15 @@
+package com.datasphera.drools.Models;
+dialect "mvel"
+
+import com.datasphera.drools.Applicant;
+import com.datasphera.drools.Loan;
+
+rule "Apply Loan"
+    when 
+        $app:Applicant(age >20);
+        $loan:Loan()
+    then 
+      $loan.setApproval(true);
+      update($loan);            
+
+end   
