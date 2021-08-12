@@ -11,6 +11,7 @@ import org.kie.api.builder.KieFileSystem;
 import org.kie.api.builder.KieModule;
 import org.kie.api.builder.KieRepository;
 import org.kie.api.builder.Message;
+import org.kie.api.builder.model.KieBaseModel;
 import org.kie.api.io.ResourceType;
 import org.kie.api.runtime.KieContainer;
 import org.kie.api.runtime.KieSession;
@@ -20,16 +21,15 @@ import org.slf4j.LoggerFactory;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.Configuration;
-import org.springframework.util.ResourceUtils;
 
 @Configuration
-@ComponentScan("com.baeldung.spring.drools.service")
 public class LoanConfiguration {
     private static final String drlFile = "rule.drl";
     private Logger log = LoggerFactory.getLogger(LoanConfiguration.class);
 
-    @Bean
+    /*@Bean
     public KieContainer kieContainer() {
+        KieBaseModel model = new KieBaseModel();
         KieServices ks = KieServices.Factory.get();
         KieRepository kr = ks.getRepository();
         KieFileSystem kfs = ks.newKieFileSystem();
@@ -42,6 +42,9 @@ public class LoanConfiguration {
         if (kb.getResults().hasMessages(Message.Level.ERROR)) {
             throw new RuntimeException("Build Errors:\n" + kb.getResults().toString());
         }
+
+        KieModule kieModule = kb.getKieModule();
+        log.info("Kie release ID:" + kieModule.getReleaseId());
 
         KieContainer kContainer = ks.newKieContainer(kr.getDefaultReleaseId());
 
@@ -62,7 +65,7 @@ public class LoanConfiguration {
         log.info(applicant.toString());
         log.info(loan.toString());
         return kContainer;
-        /*try
+        try
         {
             KieServices kieServices = KieServices.Factory.get();
 
@@ -82,6 +85,7 @@ public class LoanConfiguration {
         catch (Exception ex) {
             log.error("Could not load kie server", ex);
             return null;
-        }*/
-    }
+        }
+        return null;
+    }*/
 }
